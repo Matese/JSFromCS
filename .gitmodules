@@ -1,0 +1,3 @@
+[submodule "PdfLib/Javascript/node-signpdf"]
+	path = PdfLib/Javascript/node-signpdf
+	url = https://github.com/Matese/node-signpdf.git
