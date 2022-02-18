@@ -1,12 +1,14 @@
 ﻿using Jering.Javascript.NodeJS;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using PdfLib.IO;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
 
-namespace PdfLib
+namespace PdfLib.Signatures
 {
     public class PdfSigner
     {
@@ -14,17 +16,13 @@ namespace PdfLib
         {
             if (!Directory.Exists(projectPath))
             {
+                Directory.CreateDirectory(projectPath);
+
                 var tempPath = Path.Combine(projectPath, "temp.zip");
+
                 var resourceName = "PdfLib.Javascript.zip";
 
-                using (var inputStream = typeof(PdfSigner).Assembly.GetManifestResourceStream(resourceName))
-                {
-                    using (var fileStream = File.Create(tempPath))
-                    {
-                        inputStream.Seek(0, SeekOrigin.Begin);
-                        inputStream.CopyTo(fileStream);
-                    }
-                }
+                FileHelper.CreateFile(typeof(PdfSigner).Assembly.GetManifestResourceStream(resourceName), tempPath);
 
                 ZipFile.ExtractToDirectory(tempPath, projectPath);
                 File.Delete(tempPath);
@@ -33,7 +31,7 @@ namespace PdfLib
 
         private static string ProjectCallYarnInstall(string projectPath)
         {
-            var command = $"\"cd /D {projectPath} && yarn install\"";
+            var command = $"\"cd /D {projectPath}\\node-signpdf && yarn install\"";
 
             var startInfo = new ProcessStartInfo
             {
@@ -69,17 +67,25 @@ namespace PdfLib
             return ProjectGetService(projectPath);
         }
 
-        public static async Task<string> Sign(byte[] pdfBuffer, byte[] p12Buffer)
+        public static async Task<string> Sign(PdfSignerArgs args)
         {
             var projectPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Javascript");
             var nodeJSService = Install(projectPath);
-            
-            // Invoke from file
-            string result = await nodeJSService
-                .InvokeFromFileAsync<string>("./interop.js", args: new[] { "TODO" })
-                .ConfigureAwait(false);
 
-            return result;
+            try
+            {
+                args.CreateTempFiles();
+
+                string result = await nodeJSService
+                    .InvokeFromFileAsync<string>("./interop.js", args: new[] { JsonConvert.SerializeObject(args) })
+                    .ConfigureAwait(false);
+
+                return result;
+            }
+            finally
+            {
+                args.DeleteTempFiles();
+            }
         }
     }
 }
