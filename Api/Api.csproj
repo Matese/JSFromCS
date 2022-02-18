@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Jering.Javascript.NodeJS" version="6.3.0"/>
+        <PackageReference Include="Jering.Javascript.NodeJS" version="6.3.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" version="2.2.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions" version="2.2.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" version="2.2.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Http.Features" version="2.2.0"/>
+        <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" version="5.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" version="2.2.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" version="5.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" version="5.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" version="2.2.0"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" version="2.2.0"/>
+        <PackageReference Include="Microsoft.Extensions.Http" version="5.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Logging" version="5.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" version="5.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Options" version="5.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Primitives" version="5.0.0"/>
+        <PackageReference Include="System.Buffers" version="4.5.1"/>
+        <PackageReference Include="System.Diagnostics.DiagnosticSource" version="5.0.0"/>
+        <PackageReference Include="System.Memory" version="4.5.4"/>
+        <PackageReference Include="System.Numerics.Vectors" version="4.5.0"/>
+        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" version="5.0.0"/>
+        <PackageReference Include="System.Text.Encodings.Web" version="5.0.1"/>
+        <PackageReference Include="System.Text.Json" version="5.0.2"/>
+        <PackageReference Include="System.Threading.Tasks.Extensions" version="4.5.4"/>
+        <PackageReference Include="System.ValueTuple" version="4.5.0"/>		
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.5.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.1.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="5.5.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\PdfLib\PdfLib.csproj" />
+	</ItemGroup>
+
+</Project>
